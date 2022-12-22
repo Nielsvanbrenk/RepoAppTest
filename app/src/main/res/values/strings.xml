@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Recycler_view_test</string>
+    <string name="eigenaar_naam">Eigenaar naam</string>
+    <string name="beschrijving">Beschrijving</string>
+    <string name="titel">Titel</string>
+    <string name="private_public">Private/public</string>
+    <string name="visit_repo">Visit repo</string>
+    <string name="repo_image">Repo_Image</string>
+    <string name="repo_image_description">Repo_image</string>
+</resources>

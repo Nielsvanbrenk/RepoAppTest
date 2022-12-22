@@ -1,0 +1,19 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://p-nexus-3.development.nl.eu.abnamro.com:8443/repository/android-group/' }
+        maven { url 'https://p-nexus-3.development.nl.eu.abnamro.com:8443/repository/android-releases/' }
+
+    }
+}
+rootProject.name = "Recycler_view_test"
+include ':app'
