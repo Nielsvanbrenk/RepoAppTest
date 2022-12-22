@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
             "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png"
         )
 
-        val imageUri = "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png"
+        val imageUri = "https://avatars.githubusercontent.com/u/15876397?v=4"
         println("test")
         val imageView2 = findViewById<ImageView>(R.id.imageView2)
 
