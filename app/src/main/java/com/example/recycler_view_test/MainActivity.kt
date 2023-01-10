@@ -1,24 +1,28 @@
 package com.example.recycler_view_test
 
+import android.content.Context
+import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.example.recycler_view_test.MyAdapter
-import com.example.recycler_view_test.R
-import com.squareup.picasso.Picasso
-import java.util.jar.Manifest
+import okhttp3.OkHttpClient
+import okhttp3.Request
+import java.net.URL
 
-class MainActivity : AppCompatActivity() {
+
+class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
+
+
+
     private val REQUEST_CODE_INTERNET = 1
     private val REQUEST_CODE_EXTERNAL_STORAGE = 2
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -29,19 +33,22 @@ class MainActivity : AppCompatActivity() {
                 REQUEST_CODE_INTERNET
             )
         }
-//
-//        if (ContextCompat.checkSelfPermission(this,
-//                android.Manifest.permission.READ_EXTERNAL_STORAGE)
-//        != PackageManager.PERMISSION_GRANTED) {
-//            ActivityCompat.requestPermissions(
-//                this,
-//                arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
-//                REQUEST_CODE_EXTERNAL_STORAGE
-//            )
-//        }
 
 
-//        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
+
+
+        val thread = Thread {
+            try {
+                //Your code goes here
+                val response = getRequest("https://api.github.com/users/abnamrocoesd/repos?page=1&per_page=10")
+                println(response)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+
+        thread.start()
+        val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 
         val imageUrls = listOf(
             "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
@@ -58,17 +65,49 @@ class MainActivity : AppCompatActivity() {
             "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png"
         )
 
-        val imageUri = "https://avatars.githubusercontent.com/u/15876397?v=4"
-        println("test")
-        val imageView2 = findViewById<ImageView>(R.id.imageView2)
-
-        println("imageUri is $imageUri")
-        Picasso.get().isLoggingEnabled = true
-        Picasso.get().load(imageUri).into(imageView2);
-        println("TEST: ${Picasso.get().load(imageUri).into(imageView2)}")
-
-        val adapter = MyAdapter(imageUrls)
-//        recyclerView.adapter = adapter
-//        recyclerView.layoutManager = LinearLayoutManager(this)
+        val adapter = MyAdapter(imageUrls, this)
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(this)
     }
+
+    override fun onItemClick(position: Int, context: Context) {
+
+        val repotitle = "testTitel"
+        val ownername = "testName"
+        val description = "testDescription"
+        var public = "true"
+        val imgUrl = "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png"
+
+        val intent = Intent(context, DetailActivity::class.java)
+        intent.putExtra(DetailActivity.POSITION, position.toString())
+        intent.putExtra(DetailActivity.REPO_TITLE, repotitle)
+        intent.putExtra(DetailActivity.OWNER_NAME, ownername)
+        intent.putExtra(DetailActivity.DESCRIPTION, description)
+        intent.putExtra(DetailActivity.VISIBILITY, position.toString())
+        intent.putExtra(DetailActivity.PUBLIC, public)
+        intent.putExtra(DetailActivity.IMG_URL, imgUrl)
+        context.startActivity(intent)
+    }
+
+    var client: OkHttpClient = OkHttpClient();
+
+
+    private fun getRequest(sUrl: String): String? {
+        var result: String? = null
+        try {
+            // Create URL
+            val url = URL(sUrl)
+            // Build request
+            val request = Request.Builder().url(url).build()
+            // Execute request
+            val response = client.newCall(request).execute()
+            result = response.toString()
+        }
+        catch(err:Error) {
+            print("Error when executing get request: "+err.localizedMessage)
+        }
+        return result
+    }
+
 }
+
