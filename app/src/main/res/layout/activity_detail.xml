@@ -15,7 +15,8 @@
         android:contentDescription="@string/repo_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_launcher_background"
+        tools:srcCompat="@drawable/ic_launcher_background" />
 
     <TextView
         android:id="@+id/RepoTitle"

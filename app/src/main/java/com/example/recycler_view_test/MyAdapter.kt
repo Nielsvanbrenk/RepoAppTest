@@ -23,8 +23,7 @@ class MyAdapter(
     }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-//        GET DATA FROM API
-
+//TODO:        GET DATA FROM API
 
         val imageUrl = imageUrls[position]
 

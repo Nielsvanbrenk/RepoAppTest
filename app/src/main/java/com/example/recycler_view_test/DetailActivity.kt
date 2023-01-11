@@ -33,7 +33,7 @@ class DetailActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.RepoTitle).text = repoTitle
         findViewById<TextView>(R.id.OwnerName).text = ownerName
         findViewById<TextView>(R.id.description).text = description
-        findViewById<TextView>(R.id.description2).text = public
+        findViewById<TextView>(R.id.description2).text = link
         findViewById<TextView>(R.id.Visibility).text = visibility
 
         Picasso.get().load(link).into(findViewById<ImageView>(R.id.imageView))

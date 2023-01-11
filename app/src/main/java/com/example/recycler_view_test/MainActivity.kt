@@ -9,6 +9,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.beust.klaxon.JsonObject
+import com.beust.klaxon.Parser.Companion.default
+import com.github.kittinunf.fuel.httpGet
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import java.net.URL
@@ -34,34 +37,51 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
             )
         }
 
+//        var page = 0
+//        val parser = default(  )
 
-
-
-        val thread = Thread {
-            try {
-                //Your code goes here
-                val response = getRequest("https://api.github.com/users/abnamrocoesd/repos?page=1&per_page=10")
-                println(response)
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-
-        thread.start()
+//        val thread = Thread {
+//            try {
+//
+//                val (_, _, result) = "https://api.github.com/users/abnamrocoesd/repos?page=1&per_page=10".httpGet().responseString()
+//                val data: JsonObject = parser.parse(result.toString()) as JsonObject
+//
+//                //Your code goes here
+//                var totalPages = data.size/10
+//                println(data)
+//                println("TESTJE")
+//            } catch (e: Exception) {
+//                e.printStackTrace()
+//            }
+//        }
+//
+//        thread.start()
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
 
         val imageUrls = listOf(
             "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
             "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
-//            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
-//            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
-//            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
-//            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
-//            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
-//            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
-//            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
-//            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
-//            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
+            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
+            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
+            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
+            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
+            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
+            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
+            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
+            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
+            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
+            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
+            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
+            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
+            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
+            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
+            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
+            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
+            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
+            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
+            "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png",
+            "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png",
+            "https://leanbetekenis.nl/wp-content/uploads/2016/02/Rabobank-logo.jpg",
             "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png"
         )
 
@@ -76,7 +96,7 @@ class MainActivity : AppCompatActivity(), MyAdapter.OnItemClickListener {
         val ownername = "testName"
         val description = "testDescription"
         var public = "true"
-        val imgUrl = "https://scrumevent.nl/wp-content/uploads/ING_logo-lion-880x660.png"
+        val imgUrl = "https://vanervenverzekeringen.nl/wp-content/uploads/2016/11/ABN-Amro-logo.png"
 
         val intent = Intent(context, DetailActivity::class.java)
         intent.putExtra(DetailActivity.POSITION, position.toString())
